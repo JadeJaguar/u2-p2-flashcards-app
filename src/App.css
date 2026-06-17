@@ -1,0 +1,280 @@
+/* ---- Google Fonts Import ---- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=Space+Mono&display=swap');
+
+/* ---- Global Reset ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- App ---- */
+.app {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 24px 48px;
+  position: relative;
+  overflow-x: hidden;
+
+  /* Designed background: deep dark base with a radial glow */
+  background-color: #080810;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(110, 58, 255, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(41, 168, 224, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 10% 80%, rgba(224, 123, 57, 0.15) 0%, transparent 60%);
+}
+
+/* Subtle dot grid overlay on top of the background */
+.app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* All content sits above the dot grid */
+.app > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Header ---- */
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.app-title {
+  /* Playfair Display for big, characterful display text */
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+
+  /* Gradient text effect */
+  background: linear-gradient(135deg, #f7a9a9 0%, rgba(255, 19, 19, 0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-description {
+  /* Inter for clean, readable body text */
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: rgb(228, 127, 54);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.app-count {
+  /* Space Mono for small data/label text, gives a technical feel */
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: rgb(232, 184, 28);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---- Main ---- */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* ---- Flashcard Shell ---- */
+.flashcard {
+  width: 480px;
+  height: auto;
+  min-height: 380px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+/* ---- 3D Flip Container ---- */
+.card-inner {
+  width: 100%;
+  height: auto;
+  min-height: 380px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: 20px;
+}
+
+.flashcard.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* ---- Front and Back Shared Styles ---- */
+.card-front,
+.card-back {
+  width: 100%;
+  min-height: 380px;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 28px;
+  gap: 8px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+.card-back {
+  /* Keep absolute so it sits behind the front */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+}
+
+/* ---- Subject Color Themes ---- */
+.flashcard.geography .card-front,
+.flashcard.geography .card-back {
+  background: linear-gradient(145deg, #1e3a14, #2d5520);
+  border: 1.5px solid rgba(106, 158, 80, 0.6);
+}
+
+.flashcard.food .card-front,
+.flashcard.food .card-back {
+  background: linear-gradient(145deg, #3a1a08, #5a2c10);
+  border: 1.5px solid rgba(224, 123, 57, 0.6);
+}
+
+.flashcard.space .card-front,
+.flashcard.space .card-back {
+  background: linear-gradient(145deg, #06061e, #12124a);
+  border: 1.5px solid rgba(110, 58, 255, 0.7);
+}
+
+.flashcard.science .card-front,
+.flashcard.science .card-back {
+  background: linear-gradient(145deg, #081828, #0e2a42);
+  border: 1.5px solid rgba(41, 168, 224, 0.6);
+}
+
+/* ---- Card Content ---- */
+
+.card-image {
+  width: 100%;
+  max-width: 300px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 2px 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-subject {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.card-difficulty {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background-color: rgba(255, 255, 255, 0.12);
+  letter-spacing: 0.05em;
+}
+
+.card-question {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.card-answer {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 380px;
+}
+
+.card-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  opacity: 0.35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ---- Next Button ---- */
+.next-button {
+  font-family: 'Inter', sans-serif;
+  padding: 10px 46px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(255, 165, 165, 0.756);
+  border: 2px solid rgb(130, 71, 71);
+  color: #655341;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.next-button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.next-button:active {
+  transform: translateY(0);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 550px) {
+  .flashcard {
+    width: calc(100vw - 48px);
+    height: auto;
+    min-height: 320px;
+  }
+
+  .card-inner {
+    min-height: 320px;
+  }
+
+  .card-front,
+  .card-back {
+    min-height: 320px;
+  }
+
+  .card-image {
+    height: 130px;
+  }
+}
+
+.app {
+  background-image: url('/src/assets/bg13.jpg');
+  background-size: cover;
+  background-position: center;
+}

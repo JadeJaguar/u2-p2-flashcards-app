@@ -47,4 +47,8 @@ The following **additional** features are implemented:
 
 
 
+https://github.com/user-attachments/assets/a0d89bb5-6976-4307-befd-ab9d1f7113ae
+
+
+
 <video controls src="src/assets/WEB102_Project2_Walkthrough.mp4" title="Title"></video>

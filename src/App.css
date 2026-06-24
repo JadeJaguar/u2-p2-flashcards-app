@@ -19,14 +19,7 @@
   padding: 24px 24px 48px;
   position: relative;
   overflow-x: hidden;
-
-  /* Designed background: deep dark base with a radial glow */
-  background-color: #080810;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(110, 58, 255, 0.35) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(41, 168, 224, 0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 30% at 10% 80%, rgba(224, 123, 57, 0.15) 0%, transparent 60%);
-}
+  }
 
 /* Subtle dot grid overlay on top of the background */
 .app::before {
@@ -273,8 +266,237 @@
   }
 }
 
-.app {
-  background-image: url('/src/assets/bg13.jpg');
-  background-size: cover;
-  background-position: center;
+
+/* ---- Streak bar ---- */
+.streak-bar {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: #7a6a5a;
+  letter-spacing: 0.05em;
+}
+
+.streak-bar strong {
+  color: #c87a10;
+}
+
+.streak-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* ---- Guess input area ---- */
+.guess-area {
+  display: flex;
+  gap: 10px;
+  width: 480px;
+  max-width: calc(100vw - 48px);
+}
+
+.guess-input {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  border: 1.5px solid #c4b8a8;
+  border-radius: 12px;
+  color: #2c2420;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guess-input::placeholder {
+  color: #b0a090;
+}
+
+.guess-input:focus {
+  border-color: #8a7060;
+  box-shadow: 0 0 0 3px rgba(138, 112, 96, 0.12);
+}
+
+.guess-input--correct {
+  border-color: #3a8c5c !important;
+  box-shadow: 0 0 0 3px rgba(58, 140, 92, 0.12) !important;
+}
+
+.guess-input--wrong {
+  border-color: #c04040 !important;
+  box-shadow: 0 0 0 3px rgba(192, 64, 64, 0.12) !important;
+}
+
+.submit-button {
+  font-family: 'Inter', sans-serif;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #3c2c20;
+  border: none;
+  color: #f5ede4;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.submit-button:hover {
+  background: #5a3e2e;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* ---- Feedback text ---- */
+.feedback-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 10px;
+}
+
+.feedback-text--correct {
+  background: #e8f5ee;
+  color: #236b3e;
+  border: 1px solid #a8d8bc;
+}
+
+.feedback-text--wrong {
+  background: #faeaea;
+  color: #9c2c2c;
+  border: 1px solid #e8aaaa;
+}
+
+/* ---- Navigation row ---- */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Shared base for all nav/action buttons */
+.nav-button,
+.shuffle-button,
+.master-button {
+  font-family: 'Inter', sans-serif;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  border: none;
+}
+
+/* Back / Next */
+.nav-button {
+  background: #3c2c20;
+  color: #f5ede4;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: #5a3e2e;
+  transform: translateY(-2px);
+}
+
+.nav-button:disabled {
+  background: #d8cfc8;
+  color: #a09080;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Shuffle */
+.shuffle-button {
+  background: #2e1f6e;
+  color: #d4c8ff;
+}
+
+.shuffle-button:hover {
+  background: #3d2a96;
+  transform: translateY(-2px);
+}
+
+/* Mastered */
+.master-button {
+  background: #1a5c38;
+  color: #b8ecd0;
+}
+
+.master-button:hover {
+  background: #236b44;
+  transform: translateY(-2px);
+}
+
+/* ---- Mastered list ---- */
+.mastered-list {
+  width: 480px;
+  max-width: calc(100vw - 48px);
+  background: #f5f0ea;
+  border: 1px solid #ddd0c0;
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+
+.mastered-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #3a8c5c;
+  margin-bottom: 10px;
+}
+
+.mastered-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: #6a5a48;
+  padding: 6px 0;
+  border-bottom: 0.5px solid #ddd0c0;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mastered-item:last-child {
+  border-bottom: none;
+}
+
+/* Undo button inside each mastered row */
+.unmaster-button {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #c04040;
+  background: transparent;
+  color: #c04040;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.unmaster-button:hover {
+  background: #c04040;
+  color: #fff;
+}
+
+/* Disabled state for the submit button after submission */
+.submit-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
 }

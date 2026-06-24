@@ -37,6 +37,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
+* [x] Mastered cards can be sent back
 * [x] Mastered cards can be sent back to the active deck using an Undo button in the mastered list
 * [x] The input box and submit button are locked after a guess is submitted, preventing multiple submissions on the same card
 * [x] The card flip state resets automatically when navigating to a new card
